@@ -14,9 +14,9 @@ Este proyecto es un juego de cartas donde los jugadores intentan emparejar todas
 Fue creado como parte de un proyecto de aprendizaje en el curso de Desarrollo de Aplicaciones Web. ¡Desafía a tus amigos y demuestra quién tiene la mejor memoria! 🔥
 
 ✨ Características
-Interfaz intuitiva: Fácil de entender y jugar.
-Diferentes modalidades.
-Puntaje dinamico.
+-Interfaz intuitiva: Fácil de entender y jugar.
+-Diferentes modalidades.
+-Puntaje dinamico.
 
 🎮 Cómo Jugar
 Inicio del Juego: Al iniciar, todas las cartas estarán boca abajo.
@@ -24,13 +24,13 @@ Voltear Cartas: Selecciona la columna y fila que quieras levantar y se levantara
 Emparejar: Si las cartas coinciden, ¡se quedarán dadas la vuelta! Si no, se tapan de nuevo.
 Ganar: Encuentra todos los pares en el menor número de intentos posible. 🎉
 
-🛠️ Tecnologías Usadas
-Python
+🛠️ Tecnologías Usadas: 
+ Python
 
-📬 Contacto
+📬 Contacto: 
 Para más información o sugerencias:
 
-Email: adrianescolar2005@gmail.com
-LinkedIn: https://www.linkedin.com/in/adrian-escolar-339914166/
+ Email: adrianescolar2005@gmail.com
+ LinkedIn: https://www.linkedin.com/in/adrian-escolar-339914166/
 
 
