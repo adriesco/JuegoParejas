@@ -17,7 +17,7 @@ def tablero():
                 tablero = []  
 
                 for _ in range(filas): 
-                    fila = ['_'] * columnas  
+                    fila = ['❓'] * columnas  
                     tablero.append(fila)  
 
                 for fila in tablero:
