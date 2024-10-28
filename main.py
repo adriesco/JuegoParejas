@@ -18,34 +18,48 @@ def tablero():
                 print("El tamaño tiene que estar entre 2x2 o 6x5")
 
     #Aqui va un for con el simbolo para formar el tablero
-                
+                for "_" in range(filas):
+                    for "_" in range(columnas):
+                        print(" ",end="")
 
 
         
 
-
 def main():
-    print("Bienvenido a la aplicación de las parejas");
-    print("Este es el menú de las opciones ...");
-    print("1. Persona vs Persona");
-    print("2. Persona vs Maquina");
-    print("3. Maquina vs Maquina");
-    print("4. Salir");
-    menu=int(input("Elija una opción: "));
-    if menu==1:
-        print("Bienvenido a la opción Perosna vs Persona");
-        print("1. Jugador 1");
-        nombre1=input("Ingrese el nombre del jugador 1: ");
-        print("2. Jugador 2");
-        nombre2=input("Ingrese el nombre del jugador 2: ");
-        print("Tablero:" + tablero);
-        tablero();
-    elif menu==2:
-        print("Bienvenido a la opción Perosna vs Maquina");
-        tablero();
-    elif menu==3:
-        print("Bienvenido a la opción Maquina vs Maquina");
-        tablero();
-    else :
-        print("Gracias por jugar");
-        exit();
+    print("Bienvenido a la aplicación de las parejas")
+    
+    while True:
+        print("Este es el menú de las opciones ...")
+        print("1. Persona vs Persona")
+        print("2. Persona vs Maquina")
+        print("3. Maquina vs Maquina")
+        print("4. Salir")
+        
+        menu = int(input("Elija una opción: "))
+        
+        if menu == 1:
+            print("Bienvenido a la opción Persona vs Persona")
+            print("1. Jugador 1")
+            nombre1 = input("Ingrese el nombre del jugador 1: ")
+            print("2. Jugador 2")
+            nombre2 = input("Ingrese el nombre del jugador 2: ")
+            print("Tablero:")
+            tablero()
+            
+        elif menu == 2:
+            print("Bienvenido a la opción Persona vs Maquina")
+            tablero()
+            
+        elif menu == 3:
+            print("Bienvenido a la opción Maquina vs Maquina")
+            tablero()
+            
+        elif menu == 4:
+            print("Gracias por jugar")
+            break  # Sale del bucle y termina el programa
+            
+        else:
+            print("Opción no válida, por favor intente nuevamente")
+
+# Llama a la función main para iniciar el programa
+main()
