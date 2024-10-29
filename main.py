@@ -8,46 +8,46 @@ def tablero():
         # Calcular el total de posiciones
         total_posiciones = filas * columnas
 
-        # Se comprueba el tamaño del tablero si es par se imprime el tablero si no se muestra un mensaje de error
+        # Verificar que el tamaño del tablero sea válido y par
         if 2 <= filas <= 6 and 2 <= columnas <= 5:
             if total_posiciones % 2 == 0:
                 print("Mostrando tablero...")
-                
-                tablero = []  
 
-                # For para imprimir la tabla
+                # Crear tablero inicial con interrogaciones
+                tablero = []
                 for _ in range(filas): 
                     fila = ['❓'] * columnas  
                     tablero.append(fila)  
-
+                
+                # Imprimir el tablero inicial
                 for fila in tablero:
-                    print(" ".join(fila))  # en este print se imprime cada fila del tablero
+                    print(" ".join(fila))
 
-                #Lista con los emojis
-                cartas = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒"]
-                #Se mezclan las cartas con shuffle
-                random.shuffle(cartas)
-                #Para que el numero de cartas sea igual a el de las posiciones 
-                cartas = cartas[:total_posiciones]
+                # Lista de emojis para las cartas
+                emojis = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒", "🔞", "📷", "⚽", "💩"]
 
-                print("Tablero oculto:")
-                # Asigna a cada posicion una carta
+                # Asegurarse de tener suficientes pares de cartas
+                num_pares = total_posiciones // 2
+                cartas = (emojis[:num_pares] * 2)[:total_posiciones]  # Crear pares exactos y recortar
+                random.shuffle(cartas)  # Mezclar las cartas
+
+                # Asignar cartas al tablero
                 n = 0
                 for i in range(filas):
                     for j in range(columnas):
                         tablero[i][j] = cartas[n]
                         n += 1
 
-                # Mostrar las cartas en el tablero oculto
+                # Mostrar el tablero con las cartas asignadas
+                print("\nTablero oculto con las cartas:")
                 for fila in tablero:
                     print(" ".join(fila))
+
             else:
                 print("Error: El tablero debe tener un número par de posiciones.")
-                
         else:
             print("Error: El tamaño debe estar entre 2x2 y 6x5.")
-
-
+            
 def main():
     print("Bienvenido a la aplicación de las parejas")
     
