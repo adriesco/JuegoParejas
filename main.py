@@ -24,12 +24,13 @@ def tablero():
                     print(" ".join(fila))  # en este print se imprime cada fila del tablero
 
                 #Lista con los emojis
-                cartas = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒"] * 2
+                cartas = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒"]
                 #Se mezclan las cartas con shuffle
                 random.shuffle(cartas)
                 #Para que el numero de cartas sea igual a el de las posiciones 
                 cartas = cartas[:total_posiciones]
 
+                print("Tablero oculto:")
                 # Asigna a cada posicion una carta
                 n = 0
                 for i in range(filas):
