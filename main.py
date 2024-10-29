@@ -1,7 +1,6 @@
 import random
 
 def tablero():
-
     while True:
         filas = int(input("Elige el número de filas (2-6): "))
         columnas = int(input("Elige el número de columnas (2-5): "))
@@ -16,17 +15,37 @@ def tablero():
                 
                 tablero = []  
 
+                # For para imprimir la tabla
                 for _ in range(filas): 
                     fila = ['❓'] * columnas  
                     tablero.append(fila)  
 
                 for fila in tablero:
                     print(" ".join(fila))  # en este print se imprime cada fila del tablero
+
+                #Lista con los emojis
+                cartas = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒"] * 2
+                #Se mezclan las cartas con shuffle
+                random.shuffle(cartas)
+                #Para que el numero de cartas sea igual a el de las posiciones 
+                cartas = cartas[:total_posiciones]
+
+                # Asigna a cada posicion una carta
+                n = 0
+                for i in range(filas):
+                    for j in range(columnas):
+                        tablero[i][j] = cartas[n]
+                        n += 1
+
+                # Mostrar las cartas en el tablero oculto
+                for fila in tablero:
+                    print(" ".join(fila))
             else:
                 print("Error: El tablero debe tener un número par de posiciones.")
                 
         else:
-             print("Error: El tamaño debe estar entre 2x2 y 6x5.")
+            print("Error: El tamaño debe estar entre 2x2 y 6x5.")
+
 
 def main():
     print("Bienvenido a la aplicación de las parejas")
