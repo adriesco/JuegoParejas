@@ -1,5 +1,49 @@
 import random
 
+def modo3():
+    
+        filas = int(input("Elige el número de filas para hacer el tablero (2-6): "))
+        columnas = int(input("Elige el número de columnas para hacer el tablero (2-5): "))
+
+        # Calcular el total de posiciones
+        total_posiciones = filas * columnas
+
+        # Verificar que el tamaño del tablero sea válido y par
+        if 2 <= filas <= 6 and 2 <= columnas <= 5:
+            if total_posiciones % 2 == 0:
+                # Crear tablero inicial con interrogaciones
+                tablero = []
+                for _ in range(filas): 
+                    fila = ['❓'] * columnas  
+                    tablero.append(fila)  
+
+                # Lista de emojis para las cartas
+                emojis = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒", "🔞", "🐷", "⚽", "💩"]
+
+                # Asegurarse de tener suficientes pares de cartas
+                num_pares = total_posiciones // 2
+                cartas = (emojis[:num_pares] * 2)[:total_posiciones]  # Crear pares exactos y recortar
+                random.shuffle(cartas)  # Mezclar las cartas
+
+                # Asignar cartas al tablero oculto
+                tablero_invisible = []
+                n = 0
+                for i in range(filas):
+                    fila = []
+                    for j in range(columnas):
+                        fila.append(cartas[n])
+                        n += 1
+                    tablero_invisible.append(fila)
+                
+                # Inicialización de puntuaciones y turno
+                maquina_puntuacion = 0
+                maquina2_puntuacion = 0
+                jugador_actual = True 
+                partida = True
+                turnos = 0
+    
+    
+
 def modo2():
     while True:
         Jugador = input("Introduce tu nombre: ")
