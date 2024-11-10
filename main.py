@@ -1,7 +1,7 @@
 import random
 
 def modo3():
-    
+    while True:
         filas = int(input("Elige el número de filas para hacer el tablero (2-6): "))
         columnas = int(input("Elige el número de columnas para hacer el tablero (2-5): "))
 
@@ -9,38 +9,130 @@ def modo3():
         total_posiciones = filas * columnas
 
         # Verificar que el tamaño del tablero sea válido y par
-        if 2 <= filas <= 6 and 2 <= columnas <= 5:
-            if total_posiciones % 2 == 0:
-                # Crear tablero inicial con interrogaciones
-                tablero = []
-                for _ in range(filas): 
-                    fila = ['❓'] * columnas  
-                    tablero.append(fila)  
+        if 2 <= filas <= 6 and 2 <= columnas <= 5 and total_posiciones % 2 == 0:
+            # Crear tablero inicial con interrogaciones
+            tablero = []
+            for _ in range(filas): 
+                fila = ['❓'] * columnas  
+                tablero.append(fila)  
 
-                # Lista de emojis para las cartas
-                emojis = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒", "🔞", "🐷", "⚽", "💩"]
+            # Lista de emojis para las cartas
+            emojis = ["🍕", "🍔", "🍟", "🍣", "🍩", "🍪", "🍿", "🍎", "🍇", "🍉", "🍒", "🔞", "🐷", "⚽", "💩"]
+            num_pares = total_posiciones // 2
+            cartas = (emojis[:num_pares] * 2)[:total_posiciones]
+            random.shuffle(cartas)
 
-                # Asegurarse de tener suficientes pares de cartas
-                num_pares = total_posiciones // 2
-                cartas = (emojis[:num_pares] * 2)[:total_posiciones]  # Crear pares exactos y recortar
-                random.shuffle(cartas)  # Mezclar las cartas
+            # Asignar cartas al tablero oculto
+            tablero_invisible = []
+            for i in range(filas):
+                fila = []
+                for j in range(columnas):
+                    fila.append(cartas.pop())
+                tablero_invisible.append(fila)
 
-                # Asignar cartas al tablero oculto
-                tablero_invisible = []
-                n = 0
+            maquina1_puntuacion = 0
+            maquina2_puntuacion = 0
+            jugador_actual = True
+            memoria_maquina = {}
+
+            while True:
+                # Mostrar tablero actual
+                print("\nTablero actual:")
+                for fila in tablero:
+                    print(" ".join(fila))
+
+                if jugador_actual:
+                    print("\nTurno de Máquina 1")
+                else:
+                    print("\nTurno de Máquina 2")
+
+                # Selección de cartas para la máquina
+                cartas_disponibles = []
                 for i in range(filas):
-                    fila = []
                     for j in range(columnas):
-                        fila.append(cartas[n])
-                        n += 1
-                    tablero_invisible.append(fila)
-                
-                # Inicialización de puntuaciones y turno
-                maquina_puntuacion = 0
-                maquina2_puntuacion = 0
-                jugador_actual = True 
-                partida = True
-                turnos = 0
+                        if tablero[i][j] == '❓':
+                            cartas_disponibles.append((i, j))
+                carta_encontrada = False
+
+                # Verificar la memoria
+                for carta, pos1 in memoria_maquina.items():
+                    if carta in [tablero_invisible[i][j] for i, j in cartas_disponibles]:
+                        for i, j in cartas_disponibles:
+                            if tablero_invisible[i][j] == carta and (i, j) != pos1:
+                                fila_1, col_1 = pos1
+                                fila_2, col_2 = i, j
+                                carta_encontrada = True
+                                break
+                    if carta_encontrada:
+                        break
+
+                if not carta_encontrada:
+                    fila_1, col_1 = random.choice(cartas_disponibles)
+                    cartas_disponibles.remove((fila_1, col_1))
+                    fila_2, col_2 = random.choice(cartas_disponibles)
+
+                # Mostrar selecciones de la máquina
+                print("La máquina selecciona la posición (" + str(fila_1 + 1) + ", " + str(col_1 + 1) + ")")
+                tablero[fila_1][col_1] = tablero_invisible[fila_1][col_1]
+                print("\nTablero con la primera carta:")
+                for fila in tablero:
+                    print(" ".join(fila))
+
+                print("La máquina selecciona la posición (" + str(fila_2 + 1) + ", " + str(col_2 + 1) + ")")
+                tablero[fila_2][col_2] = tablero_invisible[fila_2][col_2]
+                print("\nTablero con ambas cartas visibles:")
+                for fila in tablero:
+                    print(" ".join(fila))
+
+                if tablero[fila_1][col_1] == tablero[fila_2][col_2]:
+                    print("¡Par encontrado!")
+                    if jugador_actual:
+                        maquina1_puntuacion += 2
+                    else:
+                        maquina2_puntuacion += 2
+                    emoji = tablero[fila_1][col_1]
+                    if emoji in memoria_maquina:
+                        del memoria_maquina[emoji]
+                else:
+                    print("No es un par. Se ocultan las cartas.")
+                    if not jugador_actual:
+                        memoria_maquina[tablero_invisible[fila_1][col_1]] = (fila_1, col_1)
+                        memoria_maquina[tablero_invisible[fila_2][col_2]] = (fila_2, col_2)
+                    tablero[fila_1][col_1] = '❓'
+                    tablero[fila_2][col_2] = '❓'
+                    jugador_actual = not jugador_actual
+
+                # Comprobar si todas las cartas están descubiertas
+                juego_terminado = True
+                for fila in tablero:
+                    for carta in fila:
+                        if carta == '❓':
+                            juego_terminado = False
+                            break
+                    if not juego_terminado:
+                        break
+
+                # Si el juego ha terminado, imprimir resultados y el ganador
+                if juego_terminado:
+                    print("\n¡Juego terminado!")
+                    print("Puntuación Final de Máquina 1:", maquina1_puntuacion)
+                    print("Puntuación Final de Máquina 2:", maquina2_puntuacion)
+
+                    if maquina1_puntuacion > maquina2_puntuacion:
+                        print("Máquina 1 es la ganadora.")
+                        main()
+                    elif maquina2_puntuacion > maquina1_puntuacion:
+                        print("Máquina 2 es la ganadora.")
+                        main()
+                    else:
+                        print("¡Es un empate!")
+                        main()
+                    break
+        else:
+            print("Error: El tablero debe tener un número par de posiciones y estar entre 2x2 y 6x5.")
+
+
+
     
     
 
@@ -378,7 +470,10 @@ def main():
             modo2()
             
         elif menu == 3:
+            print("\n")
             print("Bienvenido a la opción Máquina vs Máquina")
+            modo3()
+            
             
         elif menu == 4:
             print("Gracias por jugar")
