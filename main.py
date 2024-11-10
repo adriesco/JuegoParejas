@@ -1,4 +1,8 @@
 import random
+import sys
+
+def cerrar_programa():
+    sys.exit()
 
 def modo3():
     while True:
@@ -477,7 +481,7 @@ def main():
             
         elif menu == 4:
             print("Gracias por jugar")
-            return  
+            cerrar_programa()
             
         else:
             print("Opción no válida, por favor intente nuevamente")
