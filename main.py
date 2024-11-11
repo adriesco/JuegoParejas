@@ -77,12 +77,14 @@ def modo3():
 
                 # Mostrar selecciones de la máquina
                 print("La máquina selecciona la posición (" + str(fila_1 + 1) + ", " + str(col_1 + 1) + ")")
+                pausa=input(" ")
                 tablero[fila_1][col_1] = tablero_invisible[fila_1][col_1]
                 print("\nTablero con la primera carta:")
                 for fila in tablero:
                     print(" ".join(fila))
 
                 print("La máquina selecciona la posición (" + str(fila_2 + 1) + ", " + str(col_2 + 1) + ")")
+                pausa=input(" ")
                 tablero[fila_2][col_2] = tablero_invisible[fila_2][col_2]
                 print("\nTablero con ambas cartas visibles:")
                 for fila in tablero:
@@ -92,6 +94,7 @@ def modo3():
                     print("¡Par encontrado!")
                     if jugador_actual:
                         maquina1_puntuacion += 2
+                        
                     else:
                         maquina2_puntuacion += 2
                     emoji = tablero[fila_1][col_1]
@@ -259,12 +262,14 @@ def modo2():
                         
                         # Mostrar selecciones de la máquina
                         print("La máquina selecciona la posición (" + str(fila_1 + 1) + ", " + str(col_1 + 1) + ")")
+                        pausa=input(" ")
                         tablero[fila_1][col_1] = tablero_invisible[fila_1][col_1]
                         print("\nTablero con la primera carta:")
                         for fila in tablero:
                             print(" ".join(fila))
                             
                         print("La máquina selecciona la posición (" + str(fila_2 + 1) + ", " + str(col_2 + 1) + ")")
+                        pausa=input(" ")
                         tablero[fila_2][col_2] = tablero_invisible[fila_2][col_2]
                         print("\nTablero con ambas cartas visibles:")
                         for fila in tablero:
